@@ -1,0 +1,53 @@
+{% extends 'adminBase.html' %}
+{% block title %}
+    Admin
+{% endblock title %}
+{% block body %}
+
+<span class="addDelete">
+<span class="addProduct">
+<a href="{{ url_for('addFood') }}"><button>ADD FOOD</button></a>
+</span>
+<span class="deleteAll">
+    <a href="{{ url_for('deleteAll') }}"><button>DELETE ALL</button></a>
+</span>
+</span>
+
+<div class="orders">
+    {% for  i in range(foods|length) %}
+
+    <div class="orderCard">
+        <div class="orderImage">
+            <img src="/static/images/{{ foods[i][1] }}" alt="">
+
+        </div>
+        <div class="orderTitle">
+            <h2>{{ foods[i][3] }}</h2>
+
+        </div>
+
+        <div class="orderPrice">
+
+            <p>Rs. {{ foods[i][2] }}</p>
+        </div>
+
+        {% for j in range(foodnosAndRates|length) %}
+            {% if foods[i][0] == foodnosAndRates[j][0] %}
+            <div class="orderRating">
+                <p style="margin-bottom: 3px;"> {{ "%.2f"|format(foodnosAndRates[j][1]) }} ({{ foodnosAndRates[j][2] }})</p>
+            </div>
+        {% endif %}
+    {% endfor %}
+    <div class="editDel">
+        <span class="editBtn">
+            <a href="/edit/{{ foods[i][0] }}"><button>EDIT</button></a>
+        </span>
+        <span class="delBtn">
+            <a href="/delete/{{ foods[i][0] }}"><button>DELETE</button></a>
+        </span>
+    </div>
+    </div>
+
+    {% endfor %}
+</div>
+{% endblock body %}

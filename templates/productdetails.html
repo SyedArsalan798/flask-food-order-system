@@ -1,0 +1,89 @@
+{% extends 'base.html' %}
+{% block  title%}{{ food[3] }}{% endblock  %}
+
+{% block body %}
+{% if food != [] %}
+    <div class="product">
+        <div class="productImage">
+            <img src="/static/images/{{ food[1] }}" alt="">
+        </div>
+        <div class="foodReviews">
+        <div class="productContent">
+            <div class="productTitle">
+                <h1>{{ food[3] }}</h1>
+            </div>
+            <div class="productPrice">
+                <p>Rs. {{ food[2] }}</p>
+            </div>
+            <span>Ratings: </span>
+            {% if  reviewsAndCount != None %}
+            <span style="font-size: 15px;">
+                {{ "%.2f"|format(reviewsAndCount[0]) }} ({{ reviewsAndCount[1] }})
+                
+            </span>
+            {% else %}
+            <span style="font-size: 15px;">
+                0.0 (0)
+            </span>
+            {% endif %}
+            <br>
+            <br>
+            <p class="descText">Food Details</p>
+            <div class="productDesc">
+                <p>{{ food[4] }}</p>
+            </div><br>
+            {% set foodPrice = food[2] %}
+        <div class="paymentInfoAndTotal">
+        <form action="#" method="post">
+            <span style="font-weight: 500;">Quantity:</span>
+            <input class="quantity" type="number" min="1" name="quantity" id="quantity" value="1" required oninput="calcTotal('{{ food[2] }}')"><br><br>
+            {% if Myflag %}
+            <span style="color: white; background-color: rgb(253, 91, 91); padding: 5px; width:100% ;text-align: center;">User with this payment already exists</span>
+            {% endif %}
+            <p class="descText">Payment Information</p>
+            <input type="text" pattern="[0-9]*" minlength="11" maxlength="11" name="pay_number" id="pay_number" placeholder="Pay Number" required><br><br>
+            <input type="number" min="{{ food[2] }}" name="pay_amount" id="pay_amount" placeholder="Pay Amount" required oninput="document.getElementById('pay_amount').value = parseInt(document.getElementById('totalPrice').innerHTML)"><br><br>
+            <span><input type="submit" value="BUY NOW"></span>
+        </form>
+        <span class="TP">
+            <h3>Total Price:</h3>
+            <span style="font-size: large;">Rs.</span>
+            <span style="font-size: large; color: orange;" id="totalPrice">{{ food[2] }}</span>
+
+        </span>
+
+    </div>
+        </div>
+        {% if allRevs != [] %}
+        <div class="reviews">
+            <div style="text-align: center;font-size: 20px;">Reviews</div>
+            <span class="totaReviews" style="font-size: 30px; font-weight: 800; color: orange;">{{ "%.2f"|format(reviewsAndCount[0]) }}/5</span>
+            <span>({{ reviewsAndCount[1] }})</span>
+            <br><br>
+            {% for i in range(allRevs|length) %}
+                <div style="border-bottom: 3px solid #F2F3F5;padding-bottom: 7px;" class="revs">
+                    <div style="font-style: italic; font-size: 16px;color: blue;"
+                    class="reviewerName">by {{allRevs[i][0]}} {{allRevs[i][1]}}</div>
+                    <div class="revRating">{{allRevs[i][2]}}</div>
+                    <div class="revDesc">{{allRevs[i][3]}}</div>
+                </div>
+                <br>
+            {% endfor %}
+            </div>
+            
+        {% else %}
+    <div class="reviews">
+        <div style="font-size: 18px; text-align: center;">No reviews yet.</div>
+    </div>
+        {% endif %}
+
+
+        </div>
+
+    </div>
+
+
+
+{% endif %}
+<script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>
+{% endblock %}

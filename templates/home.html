@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Home{% endblock title %}
+{% block body %}
+
+<div class="sendToMenu">
+
+<h1>Welcome to Foodie</h1>
+<p>Go checkout new products right in our store.</p>
+<span><a href="{{ url_for('menu') }}"> <button>MENU</button></a></span>
+</div>
+
+{% endblock body %}

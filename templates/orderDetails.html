@@ -1,0 +1,63 @@
+{% extends 'base.html' %}
+{% block title %}Ordered{% endblock title %}
+{% block body %}
+{% if orderDetails|length != 0 %}
+<h1 style="text-align: center;margin-top: 10px;">You have recently ordered</h1>
+    <!-- {% for order in orderDetails %}
+        <p>{{ order }}</p>
+    {% endfor %} -->
+    <div class="orderDetails">
+        {% if getFlag == false %}
+        <span style="color: white; background-color: rgb(253, 91, 91); padding: 5px; width:100% ;text-align: center;">Invalid credentials provided</span>
+        {% endif %}
+        {% for i in range(orderDetails|length) %}
+        <div class="detailCard">
+            <div class="orderId">OrderID#{{ orderDetails[i][0] }}</div>
+            <span style="font-weight: 600;">Order Status: </span>
+            <span style="color:blue;font-style: italic;" class="order_status">{{ orderDetails[i][8] }}</span>
+            <div class="Singledetail">
+
+                <div class="orderedImg">
+                    <img src="/static/images/{{ orderDetails[i][3] }}" alt="">
+                </div>
+
+                <div class="foodDetail1">
+                      <span class="foodDetailHeadings">Food Title</span>
+                      <div class="Ftitle"><p>{{ orderDetails[i][1] }}</p></div>
+                      <span class="foodDetailHeadings">Food Price</span>
+                      <div class="Fprice"><p>{{ orderDetails[i][2] }}</p></div>
+                      <span class="foodDetailHeadings">Food Quantity</span>
+                      <div class="Fquantity"><p>{{ orderDetails[i][5] }}</p></div>
+                </div>
+
+                <div class="orderAndPaymentDetail">
+                    <span class="foodDetailHeadings">Date Ordered</span>
+                    <div class="orderedDate"><p>{{ orderDetails[i][4] }}</p></div>
+                    <span class="foodDetailHeadings">Bill Amount</span>
+                    <div class="orderAmount"><p>{{ orderDetails[i][6] }}</p></div>
+                    <span class="foodDetailHeadings">Pay Number</span>
+                    <div class="payNumber"><p>{{ orderDetails[i][7] }}</p></div>
+                </div>
+
+            </div>
+            {% if orderDetails[i][8] != "Pending" %}
+            <div class="reviewButton">
+                <a href="/review/{{ orderDetails[i][0] }}"><button id="revBtn" >REVIEW FOOD</button></a>
+            </div>
+            {% endif %}
+        </div>
+        {% endfor %}
+    </div>
+    {% else %}
+    <p style="text-align: center;font-size: larger;">You haven't ordered any thing yet.</p>
+    
+{% endif %}
+    <!-- <script>
+        const orderStatus = document.getElementsByClassName('order_status')
+        for (let i=0;i<orderStatus.length;i++){
+            if(orderStatus[i].innerHTML == "Delivered")
+                orderStatus.style.color = "green"
+        }
+    </script> -->
+
+{% endblock body %}

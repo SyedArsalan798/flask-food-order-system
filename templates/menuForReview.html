@@ -1,0 +1,15 @@
+{% extends 'adminBase.html' %}
+{% block title %}Reviews{% endblock title %}
+{% block body %}
+
+    <h1 style="text-align: center;">See Reviews on Foods</h1>
+<div class="AllFoodLinks">
+    <br>
+    {% for  i in range(foods|length) %}
+    <div class="foodLink">
+        <a href="/allreviews/{{ foods[i][0] }}">{{ foods[i][3] }}</a>
+    </div>
+    <br>
+    {% endfor %}
+</div>
+{% endblock body %}

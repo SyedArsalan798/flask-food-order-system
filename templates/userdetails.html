@@ -1,0 +1,57 @@
+{% extends 'adminBase.html' %}
+{% block title %}Customers{% endblock title %}
+{% block body %}
+<div class="UsersContent">
+    {% for i in range(customers|length) %}
+    <div class="userCard">
+        <h3>ID#{{ customers[i][0] }}</h3>
+
+    <section class="userSec1">
+    <div class="firstLast">
+        <span class="userlabel">
+            Full Name:
+        </span>
+        <p>{{ customers[i][3] }} {{ customers[i][4] }}</p>
+    </div>
+    <div class="Uusername">
+        <span class="userlabel">
+            Username:
+        </span>
+        <p>{{ customers[i][2] }}</p>
+    </div>
+    <div class="Uuseremail">
+        <span class="userlabel">
+            Email:
+        </span>
+        <p>{{ customers[i][7] }}</p>
+    </div>
+</section>
+
+<section class="userSec2">
+    <div class="Uuserpassword">
+        <span class="userlabel">
+            Password:
+        </span>
+        <p>{{ customers[i][5] }}</p>
+    </div>
+    <div class="Uuserphone">
+        <span class="userlabel">
+            Phone No:
+        </span>
+        <p>{{ customers[i][1] }}</p>
+    </div>
+    <div class="Uuseraddress">
+        <span class="userlabel">
+            Address:
+        </span>
+        <p>{{ customers[i][6] }}</p>
+    </div>
+</section>
+<div class="orderButton">
+    <a href="/delCustomer/{{ customers[i][0] }}"><button>REMOVE</button></a>
+</div>
+
+</div>
+{% endfor %}
+</div>
+{% endblock body %}

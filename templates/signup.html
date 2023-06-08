@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/adminStyle.css') }}">
+    <title>SignUp</title>
+</head>
+<body>
+    <div class="FormContent">
+    {% if flag %}
+        <span style="color: white; background-color: rgb(253, 91, 91); padding: 5px; width:100% ;text-align: center;">Invalid credentials provided, Please try again</span>
+    {% endif %}
+    <h1>SignUp as Customer</h1>
+    <form action="#" method="post">
+        <input type="text" name="first_name" id="first_name" placeholder="First Name" required><br><br>
+        <input type="text" name="last_name" id="last_name" placeholder="Last Name" required><br><br>
+        <input type="text" name="username" id="username" placeholder="Username" required><br><br>
+        <input type="email" name="Useremail" id="Useremail" placeholder="Email" required><br><br>
+        <input type="password" name="Userpassword" id="Userpassword" placeholder="Password" required><br><br>
+        <input type="tel" name="phone" id="phone" placeholder="Phone" required><br><br>
+        <input type="text" name="address" id="address" placeholder="Address" required><br><br>
+        <input type="submit" value="SIGN UP">
+    </form>
+</div>
+</body>
+</html>

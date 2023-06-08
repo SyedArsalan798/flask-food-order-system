@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}
+    Review
+{% endblock title %}
+
+{% block body %}
+<div class="ReviewFood">
+  {% if flag %}
+  <span style="color: white; background-color: rgb(253, 91, 91); padding: 5px; width:100% ;text-align: center;">You have already reviewed this order</span>
+  
+  {% endif %}
+
+    <h1>Review Order</h1>
+    <form action="#" method="post">
+        <input type="number" step="0.1" min="0" max="5" name="review_rate" id="review_rate" placeholder="Rating" required onkeyup=enforceMinMax(this)><br><br>
+        <textarea name="review_desc" id="review_desc" cols="30" rows="10" placeholder="Review description" required></textarea><br><br>
+        <input type="submit" value="SUBMIT">
+    </form>
+
+    <script>
+    function enforceMinMax(el) {
+        if (el.value != "") {
+          if (parseFloat(el.value) < parseFloat(el.min)) {
+            el.value = el.min;
+          }
+          if (parseFloat(el.value) > parseFloat(el.max)) {
+            el.value = el.max;
+          }
+        }
+      }
+    </script>
+{% endblock body %}

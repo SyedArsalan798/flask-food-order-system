@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/frontPage.css') }}">
+    <title>Foodie</title>
+</head>
+<body>
+<header>
+    <h2 style="text-align:center;width:33%;font-family: sans-serif;">Continue to use Foodie with one step ahead.</h2>
+<div class="signups">
+    <span><a href="{{ url_for('adminLogin') }}"> <button>LOGIN AS ADMIN</button></a></span>
+    <span><a href="{{ url_for('login') }}"> <button>LOGIN AS CUSTOMER</button></a></span>
+</div>
+</header>
+</body>
+</html>

@@ -1,0 +1,28 @@
+{% extends 'adminBase.html' %}
+{% block title %}Reviews{% endblock title %}
+{% block body %}
+{% if allreviews != [] %}
+    <div style="width: 50%;margin-left: 25%;margin-right: 25%;margin-top: 12px;" class="reviews">
+        <div style="text-align: center;font-size: 20px;">Reviews</div>
+        <span class="totaReviews" style="font-size: 30px; font-weight: 800; color: orange;">{{ "%.2f"|format(reviewsAndCount[0]) }}/5</span>
+        <span>({{ reviewsAndCount[1] }})</span>
+        <br><br>
+        {% for i in range(allreviews|length) %}
+            <div style="border-bottom: 3px solid #F2F3F5;padding-bottom: 7px;" class="revs">
+                <div style="font-style: italic; font-size: 16px;color: blue;"
+                class="reviewerName">by {{allreviews[i][0]}} {{allreviews[i][1]}}</div>
+                <div class="revRating">{{allreviews[i][2]}}</div>
+                <div class="revDesc">{{allreviews[i][3]}}</div>
+            </div>
+            <br>
+        {% endfor %}
+        </div>
+        {% else %}
+        <div class="reviews" style="width: 50%;margin-left: 25%;margin-right: 25%;margin-top: 12px;">
+            <div style="font-size: 18px; text-align: center;">
+                No reviews yet.
+            </div>
+        </div>
+            {% endif %}
+
+{% endblock body %}
