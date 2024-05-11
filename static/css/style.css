@@ -4,12 +4,12 @@
     font-family:system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
 }
 .navForhome{
-    background-color: orange;
+    background-color: #f12424;
     padding: 20px;
     display: flex;
 }
 body{
-    background-color: #F2F3F5;
+    background-color: #000000;
 }
 .menus{
     width: 40%;
@@ -17,14 +17,16 @@ body{
     flex-direction: row;
     justify-content: space-between;
 }
-.menus a{
+.menus a{            
     text-decoration: none;
-    color: white;
+    color: white;       
+    font-weight: bold; 
 }
 .logo{
     font-size: large;
     width:70%;
     color:white;
+    font-weight: bold;
 
 }
 .sendToMenu{
@@ -42,12 +44,12 @@ body{
 }
 .sendToMenu a button{
     padding: 15px 40px 15px 40px;
-    font-weight: 600;
+    font-weight: bold;
     border: none;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
     cursor:pointer;
     color: white;
-    background-color: #ffa500;
+    background-color: #f12424;
     /* border-radius: max(0px, min(8px, ((100vw - 4px) - 100%) * 9999)) / 8px; */
 }
 .filter{
@@ -112,7 +114,7 @@ body{
     border: none;
     cursor: pointer;
     color: white;
-    background-color: #ffa500;
+    background-color: #f12424;
     /* border-radius: max(0px, min(8px, ((100vw - 4px) - 100%) * 9999)) / 8px; */
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
@@ -127,7 +129,7 @@ body{
     border: none;
     cursor: pointer;
     color: white;
-    background-color: #ffa500;
+    background-color: #f12424;
     /* border-radius: max(0px, min(8px, ((100vw - 4px) - 100%) * 9999)) / 8px; */
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
@@ -203,7 +205,7 @@ body{
 .productPrice p{
     margin-top: 5px;
     font-size: x-large;
-    color: orange;
+    color: #f12424;
 }
 .productImage{
     float: left;
@@ -232,7 +234,7 @@ body{
 .accountHeading{
     text-align: center;
     margin-bottom: 20px;
-    color: orange;
+    color: #f12424;
 }
 
 .firstLastName p, .username p, .useremail p, 
@@ -284,7 +286,7 @@ body{
     font-weight:500;
 }
 .userCard h3{
-    color:orange;
+    color:#f12424;
     text-decoration:underline;
 }
 .product form .quantity{
@@ -301,7 +303,7 @@ body{
 .product form input[type='submit']{
     color: white;
     border: none;
-    background-color: #ffa500;
+    background-color: #f12424;
     border-radius: 0;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
     cursor: pointer;
@@ -390,14 +392,14 @@ input{
     padding: 10px;
     width: 300px;
     /* border-radius: max(0px, min(8px, ((100vw - 4px) - 100%) * 9999)) / 8px; */
-    border: 1px solid #F2F3F5;
+    border: 1px solid #f12424;
 }
 
 input[type='submit']{
     width: 100%;
     cursor: pointer;
     color: white;
-    background-color: #ffa500;
+    background-color: #f12424;
     border: none;
     border-radius: 0;
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
@@ -441,3 +443,9 @@ textarea{
     box-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
 }
 
+.menu-image {
+    max-width: 1000px;
+    max-height: 550px;
+    margin-top: -95px;
+    margin-bottom: 19px;
+  }
