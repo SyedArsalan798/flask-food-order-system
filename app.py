@@ -407,7 +407,7 @@ def riderLogin():
         return redirect(url_for('frontPage'))
     
 @app.route('/rider/signup', methods=['POST', 'GET'])
-def signup():
+def riderSignup():
     if "Rideremail" and "Riderpassword" not in session:
         if request.method == 'POST':
             first_name_rider = request.form['first_name_rider']
