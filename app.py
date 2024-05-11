@@ -20,7 +20,7 @@ def checkAppropriateFile(file):
 # db.CreateTableFood()
 # db.CreateTableORDERED()
 # db.CreateTableReviews()
-
+#db.CreateTableRider()
 
 app = Flask(__name__)
 app.secret_key = '7457hhhyuft26442'
@@ -380,6 +380,71 @@ def adminLogout():
         session.pop('password', None)
         return redirect(url_for('frontPage'))
     return redirect(url_for("frontPage"))
+
+
+#############################################################################################################################################
+
+@app.route('/rider/login', methods=['POST', 'GET'])
+def riderLogin():
+    if "Rideremail" and "Riderpassword" not in session:
+        if request.method == 'POST':
+            Useremail_rider = request.form['Rideremail']
+            Userpassword_rider = request.form['Riderpassword']
+            session["Rideremail"] = Useremail_rider
+            session["Riderpassword"] = Userpassword_rider
+            # we can not pass values withouot confirming that user is in the session so
+            # return render_template("admin.html", email=email, password=password)
+            check = db.checkIfRiderAlreadyExistForLogin(Useremail_rider, Userpassword_rider)
+            if (check == True):
+                return redirect(url_for('frontPage'))
+            else:
+                session.pop("Rideremail", None)
+                session.pop("Riderpassword", None)
+                return render_template("riderLogin.html", flag=True)
+        else:
+            return render_template("riderLogin.html")
+    else:
+        return redirect(url_for('frontPage'))
+    
+@app.route('/rider/signup', methods=['POST', 'GET'])
+def signup():
+    if "Rideremail" and "Riderpassword" not in session:
+        if request.method == 'POST':
+            first_name_rider = request.form['first_name_rider']
+            last_name_rider = request.form['last_name_rider']
+            username_rider = request.form['username_rider']
+            Useremail_rider = request.form['Rideremail']
+            Userpassword_rider = request.form['Riderpassword']
+            phone_rider = request.form['phone_rider']
+            address_rider = request.form['address_rider']
+
+            session['first_name_rider'] = first_name_rider
+            session['last_name_rider'] = last_name_rider
+            session['username_rider'] = username_rider
+            session['Rideremail'] = Useremail_rider
+            session['Riderpassword'] = Userpassword_rider
+            session['phone_rider'] = phone_rider
+            session['address_rider'] = address_rider
+
+            check = db.checkIfRiderAlreadyExistForSignUp(Useremail_rider, Userpassword_rider)
+            if not check:
+                db.insertIntoRider(
+                    first_name_rider, last_name_rider, username_rider, Useremail_rider, Userpassword_rider, phone_rider, address_rider)
+                return redirect(url_for('home'))
+            else:
+                session.pop('Rideremail', None)
+                session.pop('Riderpassword', None)
+                return render_template('riderSignup.html', flag=True)
+        else:
+            return render_template('riderSignup.html')
+    return redirect(url_for('home'))
+
+
+
+
+
+
+#############################################################################################################################################
 
 @app.errorhandler(404)
 def page_not_found(e):
