@@ -370,8 +370,8 @@ def userLogout():
     if "Useremail" and "Userpassword" in session:
         session.pop('Useremail', None)
         session.pop('Userpassword', None)
-        return redirect(url_for('login'))
-    return redirect(url_for("login"))
+        return redirect(url_for('frontPage'))
+    return redirect(url_for("frontPage"))
 
 @app.route('/admin/logout')
 def adminLogout():

@@ -91,7 +91,7 @@ input[type='submit']{
 .addProduct a button, .deleteAll a button{
     margin-top: 10px;
     padding: 10px 35px 10px 35px;
-    font-weight:400;
+    font-weight:700;
     font-size:medium;
     box-sizing: border-box;
     background-color: white;
