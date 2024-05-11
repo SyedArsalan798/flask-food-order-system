@@ -153,6 +153,107 @@ class Database:
         customers = cursor.execute("SELECT * from Customers")
         return customers
 
+    
+##########################################################################################################################################
+
+    @staticmethod
+    def CreateTableRider():
+        connection = s.connect("foodSystem.db")
+        cursor = connection.cursor()
+        cursor.execute('''
+        CREATE TABLE Riders(
+        rider_id    INTEGER PRIMARY KEY AUTOINCREMENT,
+        phone_no       varchar (25),
+        user_name      VARCHAR (30),
+        first_name     VARCHAR (30),
+        last_name      VARCHAR (30),
+        password        VARCHAR (30),
+        address        VARCHAR (100),
+        email          VARCHAR (50),
+        admin_id        int not null,
+        FOREIGN KEY (ADMIN_ID) REFERENCES ADMIN(ADMIN_ID)
+        )
+        '''
+                       )
+        connection.commit()
+        connection.close()
+
+    @staticmethod
+    def insertIntoRider(first_name_rider, last_name_rider, username_rider, Useremail_rider, Userpassword_rider, phone_rider, address_rider):
+        connection = s.connect("foodSystem.db")
+        cursor = connection.cursor()
+        cursor.execute("pragma foreign_keys=on")
+        cursor.execute("BEGIN TRANSACTION")
+        try:
+            cursor.execute('''INSERT INTO RIDERS(phone_no,user_name,first_name,last_name,password,address,email,admin_id) VALUES
+            (?,?,?,?,?,?,?,?)
+            ''', (phone_rider, username_rider, first_name_rider, last_name_rider, Userpassword_rider, address_rider, Useremail_rider, 1))
+            connection.commit()
+        except:
+            connection.rollback()
+        connection.close()
+
+    @ staticmethod
+    def riderIdExists(id):
+        connection = s.connect("foodSystem.db")
+        cursor = connection.cursor()
+        riderCountList = cursor.execute(
+            f"SELECT COUNT(*) FROM Riders WHERE rider_id = {id}").fetchone()
+        return int(''.join([str(n) for n in riderCountList])) == 1
+
+    @staticmethod
+    def deleteRider(id):
+        connection = s.connect("foodSystem.db")
+        cursor = connection.cursor()
+        cursor.execute("pragma foreign_keys=on")
+        cursor.execute("BEGIN TRANSACTION")
+        try:
+            cursor.execute(f"DELETE FROM Riders WHERE rider_id = {id}")
+            connection.commit()
+        except:
+            connection.rollback()
+        connection.close()
+
+    @staticmethod
+    def checkIfRiderAlreadyExistForLogin(Useremail_rider, Userpassword_rider):
+        connection = s.connect("foodSystem.db")
+        cursor = connection.cursor()
+        Riders = cursor.execute("SELECT * from Riders")
+        for rider in Riders:
+            if (Useremail_rider and Userpassword_rider) in rider:
+                return True
+        return False
+
+    @staticmethod
+    def checkIfRiderAlreadyExistForSignUp(Useremail, Userpassword):
+        connection = s.connect("foodSystem.db")
+        cursor = connection.cursor()
+        Riders = cursor.execute("SELECT * from Riders")
+        for rider in Riders:
+            if (Useremail and Userpassword) in rider:
+                return True
+            if (Useremail) in rider:
+                return True
+        return False
+
+    @staticmethod
+    def returnRiderAccordingToSession(email, password):
+        connection = s.connect("foodSystem.db")
+        cursor = connection.cursor()
+        rider = cursor.execute(
+            f"SELECT * from Riders where email = '{email}' and password = '{password}'")
+        return rider
+
+    @staticmethod
+    def returnRider():
+        connection = s.connect("foodSystem.db")
+        cursor = connection.cursor()
+        riders = cursor.execute("SELECT * from Riders")
+        return riders
+
+
+############################################################################################################################################
+    
     @staticmethod
     def CreateTableFood():
         connection = s.connect("foodSystem.db")
@@ -172,7 +273,7 @@ class Database:
         ''')
         connection.commit()
         connection.close()
-
+ 
     @staticmethod
     def InsertIntoFood(img, price, title, desc, admin_id):
         connection = s.connect("foodSystem.db")
