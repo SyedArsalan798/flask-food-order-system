@@ -6,22 +6,22 @@
 body{
     background-color: #F2F3F5;
 }
-.navForriderHome{
+.navForRider{
     background-color: orange;
     padding: 20px;
     display: flex;
 }
-.navForriderHome .menus{
+.navForRider .menuTitles{
     width: 70%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
-.navForriderHome .menus a{
+.navForRider .menuTitles a{
     text-decoration: none;
     color: white;
 }
-.navForriderHome .logo{
+.navForRider .logo{
 
     width:30%;
     color:white;
