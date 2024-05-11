@@ -185,7 +185,8 @@ class Database:
             (?, ?, ?, ?, ?)
             ''', (img, price, title, desc, admin_id))
             connection.commit()
-        except:
+        except s.Error as e:
+            print(f"Error inserting food item: {e}")
             connection.rollback()
         connection.close()
 
@@ -291,21 +292,21 @@ class Database:
         connection.close()
 
 
-    # @staticmethod
-    # def InsertIntoORDERED(customerId, foodno, quantity, payId, pay_amount):
-    #     connection = s.connect("foodSystem.db")
-    #     cursor = connection.cursor()
-    #     cursor.execute("pragma foreign_keys=on")
-    #     try:
-    #         cursor.execute('''
-    #         INSERT INTO ORDERED(customer_id,food_no,quantity,pay_id, pay_amount) VALUES
-    #         (?, ?, ?, ?, ?)
-    #         ''', (customerId, foodno, quantity, payId, pay_amount))
-    #         cursor.execute("ROLLBACK TO SAVEPOINT restart_from_payment")
-    #         connection.commit()
-    #     except:
-    #         cursor.execute("ROLLBACK TO SAVEPOINT restart_from_payment")
-    #     connection.close()
+    @staticmethod
+    def InsertIntoORDERED(customerId, foodno, quantity, payId, pay_amount):
+        connection = s.connect("foodSystem.db")
+        cursor = connection.cursor()
+        cursor.execute("pragma foreign_keys=on")
+        try:
+            cursor.execute('''
+            INSERT INTO ORDERED(customer_id,food_no,quantity,pay_id, pay_amount) VALUES
+            (?, ?, ?, ?, ?)
+            ''', (customerId, foodno, quantity, payId, pay_amount))
+            cursor.execute("ROLLBACK TO SAVEPOINT restart_from_payment")
+            connection.commit()
+        except:
+            cursor.execute("ROLLBACK TO SAVEPOINT restart_from_payment")
+        connection.close()
 
     @staticmethod
     def updateOrderStatusToDelivered(order_id):
@@ -380,7 +381,7 @@ class Database:
         cursor = connection.cursor()
         ORDERED = cursor.execute("SELECT * from ORDERED")
         return ORDERED
-
+#############################################################################################
     @ staticmethod
     def CreateTablePayment():
         connection = s.connect("foodSystem.db")

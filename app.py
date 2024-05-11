@@ -25,7 +25,7 @@ def checkAppropriateFile(file):
 app = Flask(__name__)
 app.secret_key = '7457hhhyuft26442'
 
-app.config['UPLOAD_FOLDER'] = '/home/syedarsalan/KDE/DBProject/static/images'
+app.config['UPLOAD_FOLDER'] = 'static/images'
 
 
 @app.route('/signup', methods=['POST', 'GET'])
@@ -378,8 +378,8 @@ def adminLogout():
     if "email" and "password" in session:
         session.pop('email', None)
         session.pop('password', None)
-        return redirect(url_for('adminLogin'))
-    return redirect(url_for("adminLogin"))
+        return redirect(url_for('frontPage'))
+    return redirect(url_for("frontPage"))
 
 @app.errorhandler(404)
 def page_not_found(e):
