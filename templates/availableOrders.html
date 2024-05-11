@@ -1,0 +1,57 @@
+{% extends 'riderHome.html' %}
+{% block title %}All Available Orders{% endblock title %}
+{% block body %}
+{% if orderDetails|length != 0 %}
+    <h1 style="text-align: center;margin-top: 10px;">All Available Orders</h1>
+    <!-- {% for order in orderDetails %}
+        <p>{{ order }}</p>
+    {% endfor %} -->
+    <!-- {% set ordersLength = orderDetails|length %} -->
+    <div class="orderDetails">
+        {% for i in range(orderDetails|length) %}
+        <div class="detailCard">
+            <div class="orderId">OrderID#{{ orderDetails[i][2] }} </div>
+            <div style="text-align: center;margin-top: 5px; font-size: larger;" class="customerName">{{ orderDetails[i][0] }} {{ orderDetails[i][1] }}</div>
+            <span style="color:blue;font-style: italic;" class="order_status">{{ orderDetails[i][10] }}</span>
+            <div class="Singledetail">
+
+                <div class="orderedImg">
+                    <img src="/static/images/{{ orderDetails[i][5] }}" alt="">
+                </div>
+
+                <div class="foodDetail1">
+                      <span class="foodDetailHeadings">Food Title</span>
+                      <div class="Ftitle"><p>{{ orderDetails[i][3] }}</p></div>
+                      <span class="foodDetailHeadings">Food Price</span>
+                      <div class="Fprice"><p>{{ orderDetails[i][4] }}</p></div>
+                      <span class="foodDetailHeadings">Food Quantity</span>
+                      <div class="Fquantity"><p>{{ orderDetails[i][7] }}</p></div>
+                </div>
+
+                <div class="orderAndPaymentDetail">
+                    <span class="foodDetailHeadings">Date Ordered</span>
+                    <div class="orderedDate"><p>{{ orderDetails[i][6] }}</p></div>
+                    <span class="foodDetailHeadings">Bill Amount</span>
+                    <div class="orderAmount"><p>{{ orderDetails[i][8] }}</p></div>
+                </div>
+
+            </div>
+            <div class="mark_delivered_or_pending">
+            <span class="chooseOrder">
+                <a href="/choose_orderMarked/{{ orderDetails[i][2] }}"><button id="chooseOrderBtn">CHOOSE ORDER</button></a>
+            </span>
+            <span class="mark_As_Done">
+                <a href="/update_orderMarked/{{ orderDetails[i][2] }}"><button class="markDoneBtn">MARK AS DELIVERED</button></a>
+            </span>
+        </div>
+        </div>
+        {% endfor %}
+    </div>
+
+    {% else %}
+    <p style="text-align: center;font-size: larger;">Customers have't ordered anything yet.</p>
+    
+{% endif %}
+
+
+{% endblock body %}
