@@ -386,6 +386,8 @@ def adminLogout():
 
 @app.route('/rider/login', methods=['POST', 'GET'])
 def riderLogin():
+    session.pop('Rideremail', None)
+    session.pop('Riderpassword', None)
     if "Rideremail" and "Riderpassword" not in session:
         if request.method == 'POST':
             Useremail_rider = request.form['Rideremail']
@@ -396,7 +398,7 @@ def riderLogin():
             # return render_template("admin.html", email=email, password=password)
             check = db.checkIfRiderAlreadyExistForLogin(Useremail_rider, Userpassword_rider)
             if (check == True):
-                return redirect(url_for('frontPage'))
+                return redirect(url_for('riderHome'))
             else:
                 session.pop("Rideremail", None)
                 session.pop("Riderpassword", None)
@@ -430,19 +432,61 @@ def riderSignup():
             if not check:
                 db.insertIntoRider(
                     first_name_rider, last_name_rider, username_rider, Useremail_rider, Userpassword_rider, phone_rider, address_rider)
-                return redirect(url_for('home'))
+                return redirect(url_for('riderHome'))
             else:
                 session.pop('Rideremail', None)
                 session.pop('Riderpassword', None)
                 return render_template('riderSignup.html', flag=True)
         else:
             return render_template('riderSignup.html')
-    return redirect(url_for('home'))
+    return redirect(url_for('riderHome'))
 
+@app.route('/rider/home')
+def riderHome():
+    if "Rideremail" and "Riderpassword" in session:
+        return render_template('riderHome.html')
+    return redirect(url_for('riderLogin'))
 
+@app.route('/rider/available_orders')
+def availableOrders():
+    if "Rideremail" and "Riderpassword" in session:
+        orderDetails = db.returnAvailableOrders()
+        orderDetails = orderDetails.fetchall()
+        return render_template('availableOrders.html', orderDetails=orderDetails)
+    return redirect(url_for('riderLogin'))
 
+@app.route('/rider/history')
+def riderHistory():
+    if "Rideremail" and "Riderpassword" in session:
+        orderDetails = db.returnAllOrderDetailsOfCustomerWithJoins()
+        orderDetails = orderDetails.fetchall()
+        return render_template('riderHistory.html', orderDetails=orderDetails)
+    return redirect(url_for('riderLogin'))
 
+@app.route('/rider/account')
+def riderAccount():
+    if "Rideremail" and "Riderpassword" in session:
+        useremail = session["Rideremail"]
+        userpassword = session["Riderpassword"]
+        rider = db.returnRiderAccordingToSession(useremail, userpassword)
+        rider = rider.fetchone()
+        return render_template('riderAccount.html', rider=rider)
+    return redirect(url_for('riderLogin'))
 
+@app.route('/rider/logout')
+def riderLogout():
+    if "Rideremail" and "Riderpassword" in session:
+        session.pop('Rideremail', None)
+        session.pop('Riderpassword', None)
+        return redirect(url_for('frontPage'))
+    return redirect(url_for("frontPage"))
+
+@app.route('/choose_orderMarked/<int:or_id>')
+def chooseOrderAsPending(or_id):
+    if "Rideremail" and "Riderpassword" in session:
+        db.updateOrderStatusToPending(or_id)
+        return redirect(url_for('availableOrders'))
+    return redirect(url_for('riderLogin'))
 
 #############################################################################################################################################
 

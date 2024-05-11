@@ -4,14 +4,15 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css\riderStyle.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>{% block title %}{% endblock title %}</title>
 </head>
 <body>
     <header>
-    <div class="navForriderHome">
+    <div class="navForRider">
         <div class="logo">Hot & Spicy</div>
-        <div class="menus">
+        <div class="menuTitles">
         <a href="{{ url_for('riderHome') }}">HOME</a>
         <a href="{{ url_for('availableOrders') }}">ORDERS</a>
         <a href="{{ url_for('riderHistory') }}">HISTORY</a>
