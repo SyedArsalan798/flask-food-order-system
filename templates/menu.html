@@ -3,6 +3,7 @@
 
 {% block body %}
 
+<<<<<<< Updated upstream
 <!-- <label for="filter">Filter by:</label>
 
 <select id="filters" required>
@@ -21,15 +22,42 @@
     <div class="filter">
         <div class="filterLabel">
             <h2>Filter By: </h2>
+=======
+<div class="filter">
+    <div class="filterLabel">
+        <h2 style="color: white;">Filter By: </h2>
+    </div>
+
+    <div class="filterOptions">
+        <div class="filterPrice">
+            <a href="/menu/filterByPrice"><button style="background-color: #f12424; color: white;">Price</button></a>
+>>>>>>> Stashed changes
         </div>
+        
+        <div class="filterRating">
+            <a href="/menu/filterByRating"><button style="background-color: #f12424; color: white;">Rating</button></a>
+        </div>
+    </div>
+</div>
 
-        <span class="filterPrice">
-            <a href="/menu/filterByPrice"><button>Price</button></a>
+<style>
+    .filter {
+        color: white;
+    }
+    .filterLabel {
+        text-align: center;
+    }
+    .filterOptions {
+        display: flex;
+        justify-content: center;
+    }
+    .filterPrice,
+    .filterRating {
+        margin: 0 10px;
+    }
+</style>
 
-        </span>
-        <span class="filterRating">
-            <a href="/menu/filterByRating"><button>Rating</button></a>
-        </span>
+        
 
     </div>
 
