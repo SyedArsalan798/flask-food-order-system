@@ -216,11 +216,15 @@ class Database:
 
     @staticmethod
     def checkIfRiderAlreadyExistForLogin(Useremail_rider, Userpassword_rider):
+        print(Useremail_rider)
+        print(Userpassword_rider)
         connection = s.connect("foodSystem.db")
         cursor = connection.cursor()
         Riders = cursor.execute("SELECT * from Riders")
+        print(Riders)
         for rider in Riders:
-            if (Useremail_rider and Userpassword_rider) in rider:
+            print(rider)
+            if rider[7] == Useremail_rider and rider[5] == Userpassword_rider:
                 return True
         return False
 
@@ -264,7 +268,7 @@ class Database:
         ON ORDERED.pay_id = PAYMENT.pay_id
         INNER JOIN FOOD
         ON ORDERED.food_no = FOOD.food_no
-        WHERE ORDERED.order_status = 'Issued'                            
+        WHERE ORDERED.order_status = 'Issued' OR order_status = 'Pending'                          
         order by ORDERED.Order_ID DESC
         ''')
         return orderDetails
@@ -276,6 +280,18 @@ class Database:
         cursor.execute("pragma foreign_keys=on")
         try:
             cursor.execute(f"UPDATE ORDERED SET order_status = 'Pending' where Order_Id = {order_id}")
+            connection.commit()
+        except:
+            connection.rollback()
+        connection.close()
+
+    @staticmethod
+    def updateRiderId(order_id, rider_id):
+        connection = s.connect("foodSystem.db")
+        cursor = connection.cursor()
+        cursor.execute("pragma foreign_keys=on")
+        try:
+            cursor.execute(f"UPDATE ORDERED SET rider_id = {rider_id} where Order_Id = {order_id}")
             connection.commit()
         except:
             connection.rollback()
@@ -416,7 +432,8 @@ class Database:
         FOREIGN KEY(pay_id) REFERENCES Payment(pay_id) on delete set NULL,
         FOREIGN KEY(food_no) REFERENCES FOOD(food_no) on delete cascade,
         FOREIGN KEY(customer_id) REFERENCES CUSTOMERS(customer_id) on delete cascade
-    )
+        FOREIGN KEY (rider_id) REFERENCES Rider(rider_id) on delete set NULL;
+        )
         ''')
         connection.commit()
         connection.close()

@@ -13,13 +13,13 @@ def checkAppropriateFile(file):
     return False
 
 
-# db.CreateTableAdmin()
-# db.insertIntoAdmin(1, 'xyz@gmail.com', 'cat1234')
-# db.CreateTablePayment()
-# db.CreateTableCustomer()
-# db.CreateTableFood()
-# db.CreateTableORDERED()
-# db.CreateTableReviews()
+#db.CreateTableAdmin()
+#db.insertIntoAdmin(1, 'xyz@gmail.com', 'cat1234')
+#db.CreateTablePayment()
+#db.CreateTableCustomer()
+#db.CreateTableFood()
+#db.CreateTableORDERED()
+#db.CreateTableReviews()
 #db.CreateTableRider()
 
 app = Flask(__name__)
@@ -394,6 +394,8 @@ def riderLogin():
             Userpassword_rider = request.form['Riderpassword']
             session["Rideremail"] = Useremail_rider
             session["Riderpassword"] = Userpassword_rider
+            print(Useremail_rider)
+            print(Userpassword_rider)
             # we can not pass values withouot confirming that user is in the session so
             # return render_template("admin.html", email=email, password=password)
             check = db.checkIfRiderAlreadyExistForLogin(Useremail_rider, Userpassword_rider)
@@ -452,7 +454,10 @@ def availableOrders():
     if "Rideremail" and "Riderpassword" in session:
         orderDetails = db.returnAvailableOrders()
         orderDetails = orderDetails.fetchall()
-        return render_template('availableOrders.html', orderDetails=orderDetails)
+        if orderDetails == []: 
+            return render_template('noIssued.html')
+        else:
+            return render_template('availableOrders.html', orderDetails=orderDetails)
     return redirect(url_for('riderLogin'))
 
 @app.route('/rider/history')
@@ -468,8 +473,13 @@ def riderAccount():
     if "Rideremail" and "Riderpassword" in session:
         useremail = session["Rideremail"]
         userpassword = session["Riderpassword"]
+        print(useremail)
+        print(userpassword)
         rider = db.returnRiderAccordingToSession(useremail, userpassword)
+        print(rider)
+        print(type(rider))
         rider = rider.fetchone()
+        print(rider)
         return render_template('riderAccount.html', rider=rider)
     return redirect(url_for('riderLogin'))
 
@@ -484,8 +494,20 @@ def riderLogout():
 @app.route('/choose_orderMarked/<int:or_id>')
 def chooseOrderAsPending(or_id):
     if "Rideremail" and "Riderpassword" in session:
+        Rideremail = session["Useremail"]
+        Riderpassword = session["Userpassword"]
+        rider = db.returnRiderAccordingToSession(Rideremail, Riderpassword)
+        rider = rider.fetchone()
         db.updateOrderStatusToPending(or_id)
+        db.updateRiderId(or_id, rider[0])
         return redirect(url_for('availableOrders'))
+    return redirect(url_for('riderLogin'))
+
+@app.route('/update_orderMarked_Rider/<int:or_id>')
+def markAsDoneRider(or_id):
+    if "Rideremail" and "Riderpassword" in session:
+        db.updateOrderStatusToDelivered(or_id)
+        return redirect(url_for('riderHistory'))
     return redirect(url_for('riderLogin'))
 
 #############################################################################################################################################

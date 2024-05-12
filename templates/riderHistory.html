@@ -1,5 +1,5 @@
 {% extends 'riderHome.html' %}
-{% block title %}All Available Orders{% endblock title %}
+{% block title %}All Previous Orders{% endblock title %}
 {% block body %}
 {% if orderDetails|length != 0 %}
     <h1 style="text-align: center;margin-top: 10px;">All Available Orders</h1>
@@ -33,25 +33,14 @@
                     <div class="orderedDate"><p>{{ orderDetails[i][6] }}</p></div>
                     <span class="foodDetailHeadings">Bill Amount</span>
                     <div class="orderAmount"><p>{{ orderDetails[i][8] }}</p></div>
-                    <span class="foodDetailHeadings">Pay Number</span>
-                    <div class="payNumber"><p>{{ orderDetails[i][9] }}</p></div>
                 </div>
-
             </div>
-            <div class="mark_AND_remove">
-            <span class="mark_As_Done">
-                <a href="/update_orderMarked/{{ orderDetails[i][2] }}"><button class="markDoneBtn">MARK AS DELIVERED</button></a>
-            </span>
-            <span class="removeOrder">
-                <a href="/remove_order/{{ orderDetails[i][2] }}"><button id="removeOrder">REMOVE ORDER</button></a>
-            </span>
-        </div>
         </div>
         {% endfor %}
     </div>
 
     {% else %}
-    <p style="text-align: center;font-size: larger;">Customers have't ordered anything yet.</p>
+    <p style="text-align: center;font-size: larger;">You haven't made any orders yet.</p>
     
 {% endif %}
 
