@@ -463,7 +463,12 @@ def availableOrders():
 @app.route('/rider/history')
 def riderHistory():
     if "Rideremail" and "Riderpassword" in session:
-        orderDetails = db.returnAllOrderDetailsOfCustomerWithJoins()
+        useremail = session["Rideremail"]
+        userpassword = session["Riderpassword"]
+        rider = db.returnRiderAccordingToSession(useremail, userpassword)
+        rider_id = rider.fetchone()[0]
+        orderDetails = db.returnOrderHistory(rider_id)
+        print(orderDetails)
         orderDetails = orderDetails.fetchall()
         return render_template('riderHistory.html', orderDetails=orderDetails)
     return redirect(url_for('riderLogin'))
@@ -494,8 +499,8 @@ def riderLogout():
 @app.route('/choose_orderMarked/<int:or_id>')
 def chooseOrderAsPending(or_id):
     if "Rideremail" and "Riderpassword" in session:
-        Rideremail = session["Useremail"]
-        Riderpassword = session["Userpassword"]
+        Rideremail = session["Rideremail"]
+        Riderpassword = session["Riderpassword"]
         rider = db.returnRiderAccordingToSession(Rideremail, Riderpassword)
         rider = rider.fetchone()
         db.updateOrderStatusToPending(or_id)

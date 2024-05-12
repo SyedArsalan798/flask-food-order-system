@@ -274,6 +274,28 @@ class Database:
         return orderDetails
     
     @staticmethod
+    def returnOrderHistory(rider_id):
+        connection = s.connect("foodSystem.db")
+        cursor = connection.cursor()
+        orderDetails = cursor.execute(f'''
+        SELECT Customers.first_name, Customers.last_name, ORDERED.Order_ID, FOOD.food_title, 
+        FOOD.food_price, FOOD.food_image, ORDERED.ordered_date, ORDERED.quantity, ORDERED.pay_amount, 
+        Payment.pay_number, ORDERED.order_status 
+        FROM ORDERED
+        INNER JOIN 
+        CUSTOMERS ON ORDERED.customer_id = CUSTOMERS.customer_id
+        INNER JOIN 
+        PAYMENT ON ORDERED.pay_id = PAYMENT.pay_id
+        INNER JOIN 
+        FOOD ON ORDERED.food_no = FOOD.food_no
+        WHERE ORDERED.rider_id = {rider_id} 
+        AND (ORDERED.order_status = 'Pending' OR ORDERED.order_status = 'Delivered')
+        ORDER BY 
+        ORDERED.Order_ID DESC
+        ''')
+        return orderDetails
+    
+    @staticmethod
     def updateOrderStatusToPending(order_id):
         connection = s.connect("foodSystem.db")
         cursor = connection.cursor()
@@ -428,11 +450,12 @@ class Database:
         ordered_date	TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         quantity	    int DEFAULT 0,
         pay_amount	    int NOT NULL CHECK("pay_amount" > 0),
-        order_status    VARCHAR(10) default 'Issued' CHECK(order_status='Pending' OR order_status='Delivered' OR order_status='Issued'),    
+        order_status    VARCHAR(10) default 'Issued' CHECK(order_status='Pending' OR order_status='Delivered' OR order_status='Issued'), 
+        rider_id        int NULL,   
         FOREIGN KEY(pay_id) REFERENCES Payment(pay_id) on delete set NULL,
         FOREIGN KEY(food_no) REFERENCES FOOD(food_no) on delete cascade,
         FOREIGN KEY(customer_id) REFERENCES CUSTOMERS(customer_id) on delete cascade
-        FOREIGN KEY (rider_id) REFERENCES Rider(rider_id) on delete set NULL;
+        FOREIGN KEY (rider_id) REFERENCES Riders(rider_id) on delete set NULL
         )
         ''')
         connection.commit()
