@@ -1,3 +1,4 @@
+<!-- User
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -19,5 +20,28 @@
         <input type="submit" value="LOGIN">
     </form>
 </div>
+</body>
+</html> -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title >Login as Admin</title>
+</head>
+<body style="background-color: black; color: white; font-family: Arial, sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh;">
+    <div class="FormContent" style="width: 300px; text-align: center;">
+        {% if flag %}
+            <span style="color: rgb(0, 0, 0); background-color: rgb(253, 91, 91); padding: 10px; border-radius: 5px; display: block; margin-bottom: 20px;">Invalid credentials provided</span>
+        {% endif %}
+        <form action="#" method="post" style="background-color: white; padding: 20px; border-radius: 10px;">
+            <h1 style="color: black;">Login as Admin</h1>
+            <input type="email" name="email" id="email" placeholder="Email" required style="padding: 10px; margin: 10px 0; width: 100%; box-sizing: border-box;"><br>
+            <input type="password" name="password" id="password" placeholder="Password" required style="padding: 10px; margin: 10px 0; width: 100%; box-sizing: border-box;"><br>
+            <input type="submit" value="LOGIN" style="background-color: red; color: white; padding: 10px; margin: 10px 0; width: 100%; border: none; cursor: pointer;">
+        </form>
+    </div>
 </body>
 </html>

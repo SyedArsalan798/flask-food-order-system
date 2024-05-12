@@ -4,20 +4,20 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css\riderStyle.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
     <title>{% block title %}{% endblock title %}</title>
 </head>
 <body>
     <header>
-    <div class="navForhome">
-        <div class="logo">Hot 'N Spicy</div>
-        <div class="menus">
-        <a href="{{ url_for('home') }}">HOME</a>
-        <a href="{{ url_for('menu') }}">PRODUCTS</a>
-        <a href="{{ url_for('orderDetails') }}">MY ORDERS</a>
-        <a href="{{ url_for('account') }}">ACCOUNT</a>
-        <a href="{{ url_for('admin') }}">ADMIN</a>
-        <a href="{{ url_for('userLogout') }}">LOGOUT</a>
+    <div class="navForRider">
+        <div class="logo">Hot & Spicy</div>
+        <div class="menuTitles">
+        <a href="{{ url_for('riderHome') }}">HOME</a>
+        <a href="{{ url_for('availableOrders') }}">ORDERS</a>
+        <a href="{{ url_for('riderHistory') }}">HISTORY</a>
+        <a href="{{ url_for('riderAccount') }}">ACCOUNT</a>
+        <a href="{{ url_for('riderLogout') }}">LOGOUT</a>
         </div>
     </div>
     </header>

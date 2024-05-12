@@ -153,6 +153,152 @@ class Database:
         customers = cursor.execute("SELECT * from Customers")
         return customers
 
+    
+##########################################################################################################################################
+
+    @staticmethod
+    def CreateTableRider():
+        connection = s.connect("foodSystem.db")
+        cursor = connection.cursor()
+        cursor.execute('''
+        CREATE TABLE Riders(
+        rider_id    INTEGER PRIMARY KEY AUTOINCREMENT,
+        phone_no       varchar (25),
+        user_name      VARCHAR (30),
+        first_name     VARCHAR (30),
+        last_name      VARCHAR (30),
+        password        VARCHAR (30),
+        address        VARCHAR (100),
+        email          VARCHAR (50),
+        admin_id        int not null,
+        FOREIGN KEY (ADMIN_ID) REFERENCES ADMIN(ADMIN_ID)
+        )
+        '''
+                       )
+        connection.commit()
+        connection.close()
+
+    @staticmethod
+    def insertIntoRider(first_name_rider, last_name_rider, username_rider, Useremail_rider, Userpassword_rider, phone_rider, address_rider):
+        connection = s.connect("foodSystem.db")
+        cursor = connection.cursor()
+        cursor.execute("pragma foreign_keys=on")
+        cursor.execute("BEGIN TRANSACTION")
+        try:
+            cursor.execute('''INSERT INTO RIDERS(phone_no,user_name,first_name,last_name,password,address,email,admin_id) VALUES
+            (?,?,?,?,?,?,?,?)
+            ''', (phone_rider, username_rider, first_name_rider, last_name_rider, Userpassword_rider, address_rider, Useremail_rider, 1))
+            connection.commit()
+        except:
+            connection.rollback()
+        connection.close()
+
+    @ staticmethod
+    def riderIdExists(id):
+        connection = s.connect("foodSystem.db")
+        cursor = connection.cursor()
+        riderCountList = cursor.execute(
+            f"SELECT COUNT(*) FROM Riders WHERE rider_id = {id}").fetchone()
+        return int(''.join([str(n) for n in riderCountList])) == 1
+
+    @staticmethod
+    def deleteRider(id):
+        connection = s.connect("foodSystem.db")
+        cursor = connection.cursor()
+        cursor.execute("pragma foreign_keys=on")
+        cursor.execute("BEGIN TRANSACTION")
+        try:
+            cursor.execute(f"DELETE FROM Riders WHERE rider_id = {id}")
+            connection.commit()
+        except:
+            connection.rollback()
+        connection.close()
+
+    @staticmethod
+    def checkIfRiderAlreadyExistForLogin(Useremail_rider, Userpassword_rider):
+        print(Useremail_rider)
+        print(Userpassword_rider)
+        connection = s.connect("foodSystem.db")
+        cursor = connection.cursor()
+        Riders = cursor.execute("SELECT * from Riders")
+        print(Riders)
+        for rider in Riders:
+            print(rider)
+            if rider[7] == Useremail_rider and rider[5] == Userpassword_rider:
+                return True
+        return False
+
+    @staticmethod
+    def checkIfRiderAlreadyExistForSignUp(Useremail, Userpassword):
+        connection = s.connect("foodSystem.db")
+        cursor = connection.cursor()
+        Riders = cursor.execute("SELECT * from Riders")
+        for rider in Riders:
+            if (Useremail and Userpassword) in rider:
+                return True
+            if (Useremail) in rider:
+                return True
+        return False
+
+    @staticmethod
+    def returnRiderAccordingToSession(email, password):
+        connection = s.connect("foodSystem.db")
+        cursor = connection.cursor()
+        rider = cursor.execute(
+            f"SELECT * from Riders where email = '{email}' and password = '{password}'")
+        return rider
+
+    @staticmethod
+    def returnRider():
+        connection = s.connect("foodSystem.db")
+        cursor = connection.cursor()
+        riders = cursor.execute("SELECT * from Riders")
+        return riders
+
+    @staticmethod
+    def returnAvailableOrders():
+        connection = s.connect("foodSystem.db")
+        cursor = connection.cursor()
+        orderDetails = cursor.execute(f'''
+        SELECT Customers.first_name, Customers.last_name, ORDERED.Order_ID, FOOD.food_title, FOOD.food_price, FOOD.food_image, ORDERED.ordered_date,
+        ORDERED.quantity, ORDERED.pay_amount, Payment.pay_number, ORDERED.order_status FROM ORDERED
+        INNER JOIN CUSTOMERS
+        ON ORDERED.customer_id = CUSTOMERS.customer_id
+        INNER JOIN PAYMENT
+        ON ORDERED.pay_id = PAYMENT.pay_id
+        INNER JOIN FOOD
+        ON ORDERED.food_no = FOOD.food_no
+        WHERE ORDERED.order_status = 'Issued' OR order_status = 'Pending'                          
+        order by ORDERED.Order_ID DESC
+        ''')
+        return orderDetails
+    
+    @staticmethod
+    def updateOrderStatusToPending(order_id):
+        connection = s.connect("foodSystem.db")
+        cursor = connection.cursor()
+        cursor.execute("pragma foreign_keys=on")
+        try:
+            cursor.execute(f"UPDATE ORDERED SET order_status = 'Pending' where Order_Id = {order_id}")
+            connection.commit()
+        except:
+            connection.rollback()
+        connection.close()
+
+    @staticmethod
+    def updateRiderId(order_id, rider_id):
+        connection = s.connect("foodSystem.db")
+        cursor = connection.cursor()
+        cursor.execute("pragma foreign_keys=on")
+        try:
+            cursor.execute(f"UPDATE ORDERED SET rider_id = {rider_id} where Order_Id = {order_id}")
+            connection.commit()
+        except:
+            connection.rollback()
+        connection.close()
+
+############################################################################################################################################
+    
     @staticmethod
     def CreateTableFood():
         connection = s.connect("foodSystem.db")
@@ -172,7 +318,7 @@ class Database:
         ''')
         connection.commit()
         connection.close()
-
+ 
     @staticmethod
     def InsertIntoFood(img, price, title, desc, admin_id):
         connection = s.connect("foodSystem.db")
@@ -282,11 +428,12 @@ class Database:
         ordered_date	TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
         quantity	    int DEFAULT 0,
         pay_amount	    int NOT NULL CHECK("pay_amount" > 0),
-        order_status    VARCHAR(10) default 'Pending' CHECK(order_status='Pending' OR order_status='Delivered'),    
+        order_status    VARCHAR(10) default 'Issued' CHECK(order_status='Pending' OR order_status='Delivered' OR order_status='Issued'),    
         FOREIGN KEY(pay_id) REFERENCES Payment(pay_id) on delete set NULL,
         FOREIGN KEY(food_no) REFERENCES FOOD(food_no) on delete cascade,
         FOREIGN KEY(customer_id) REFERENCES CUSTOMERS(customer_id) on delete cascade
-    )
+        FOREIGN KEY (rider_id) REFERENCES Rider(rider_id) on delete set NULL;
+        )
         ''')
         connection.commit()
         connection.close()
@@ -345,7 +492,7 @@ class Database:
         ON ORDERED.pay_id = PAYMENT.pay_id
         INNER JOIN FOOD
         ON ORDERED.food_no = FOOD.food_no
-        where CUSTOMERS.customer_id = '{customerId}'
+        where CUSTOMERS.customer_id = '{customerId}' AND ORDERED.order_status = 'Issued'
         order by ORDERED.Order_ID DESC
         ''')
         return orderDetails

@@ -1,8 +1,8 @@
-{% extends 'adminBase.html' %}
-{% block title %}All Customer Orders{% endblock title %}
+{% extends 'riderHome.html' %}
+{% block title %}All Available Orders{% endblock title %}
 {% block body %}
 {% if orderDetails|length != 0 %}
-    <h1 style="text-align: center;margin-top: 10px;">All Customer Orders</h1>
+    <h1 style="text-align: center;margin-top: 10px;">All Available Orders</h1>
     <!-- {% for order in orderDetails %}
         <p>{{ order }}</p>
     {% endfor %} -->
@@ -33,17 +33,15 @@
                     <div class="orderedDate"><p>{{ orderDetails[i][6] }}</p></div>
                     <span class="foodDetailHeadings">Bill Amount</span>
                     <div class="orderAmount"><p>{{ orderDetails[i][8] }}</p></div>
-                    <span class="foodDetailHeadings">Pay Number</span>
-                    <div class="payNumber"><p>{{ orderDetails[i][9] }}</p></div>
                 </div>
 
             </div>
-            <div class="mark_AND_remove">
-            <span class="mark_As_Done">
-                <a href="/update_orderMarked/{{ orderDetails[i][2] }}"><button class="markDoneBtn">MARK AS DELIVERED</button></a>
+            <div class="mark_delivered_or_pending">
+            <span class="chooseOrder">
+                <a href="/choose_orderMarked/{{ orderDetails[i][2] }}"><button id="chooseOrderBtn">CHOOSE ORDER</button></a>
             </span>
-            <span class="removeOrder">
-                <a href="/remove_order/{{ orderDetails[i][2] }}"><button id="removeOrder">REMOVE ORDER</button></a>
+            <span class="mark_As_Done">
+                <a href="/update_orderMarked_Rider/{{ orderDetails[i][2] }}"><button class="markDoneBtn">MARK AS DELIVERED</button></a>
             </span>
         </div>
         </div>
@@ -51,7 +49,7 @@
     </div>
 
     {% else %}
-    <p style="text-align: center;font-size: larger;color: white;">Customers have't ordered anything yet.</p>
+    <p style="text-align: center;font-size: larger;">Customers have't ordered anything yet.</p>
     
 {% endif %}
 
