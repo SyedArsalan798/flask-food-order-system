@@ -10,6 +10,7 @@ body{
     background-color: orange;
     padding: 20px;
     display: flex;
+    font-weight: bold;
 }
 .navForRider .menuTitles{
     width: 70%;
@@ -20,11 +21,13 @@ body{
 .navForRider .menuTitles a{
     text-decoration: none;
     color: white;
+    font-weight: bold;
 }
 .navForRider .logo{
 
     width:30%;
     color:white;
+    font-weight: bold;
 
 }
 
