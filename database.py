@@ -122,7 +122,7 @@ class Database:
         cursor = connection.cursor()
         Customers = cursor.execute("SELECT * from Customers")
         for customer in Customers:
-            if (Useremail and Userpassword) in customer:
+             if customer[7] == Useremail and customer[5] == Userpassword:
                 return True
         return False
     
