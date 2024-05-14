@@ -279,12 +279,21 @@ body{
     background-color: #f12424;
     padding: 20px;
     display: flex;
+    font-weight: bold;
+    font-size: medium;
 }
+
+.navForRider .logo{
+    color:#fff;
+}
+
 .menuTitles{
-    width: 40%;
+    width: 50%;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    text-align: left;
+    margin-left: auto;
 }
 .menuTitles a{
     text-decoration: none;

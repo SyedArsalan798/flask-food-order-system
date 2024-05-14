@@ -6,27 +6,6 @@
 body{
     background-color: #F2F3F5;
 }
-.navForRider{
-    background-color: orange;
-    padding: 20px;
-    display: flex;
-}
-.navForRider .menuTitles{
-    width: 70%;
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
-}
-.navForRider .menuTitles a{
-    text-decoration: none;
-    color: white;
-}
-.navForRider .logo{
-
-    width:30%;
-    color:white;
-
-}
 
 .FormContent{
     margin-top: 20px;
