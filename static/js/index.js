@@ -18,4 +18,11 @@ for (let i=0;i<orderStatus.length;i++){
     }
 }
 
+let text_parallax = document.getElementById('text_parallax')
+let burger = document.getElementById('burger')
 
+window.addEventListener('scroll', () => {
+  let value = window.scrollY;
+
+  text_parallax.style.marginTop = value * 1 + 'px';
+});
