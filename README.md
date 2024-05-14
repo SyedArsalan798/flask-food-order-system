@@ -1,4 +1,4 @@
-# HOR 'N SPICY 
+# HOT 'N SPICY 
 Created with Flask (Python micro framework for website development), SQlite3, HTML5, CSS3, JavaScript
 
 ## Overview of the app itself
