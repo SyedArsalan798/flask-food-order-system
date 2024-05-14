@@ -273,6 +273,7 @@ body{
     opacity: 1;
     transform: translateY(0px);
     transition-delay: 0.75s;
+    z-index: 1000;
 }
 
 .navForRider{
