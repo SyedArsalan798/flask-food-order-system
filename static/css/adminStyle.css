@@ -12,18 +12,23 @@ body{
     display: flex;
     font-weight: bold;
     font-size: medium;
+    margin-right: 20px;
+    padding-right: 10%;
+    margin-left: 10px;
+    justify-content: space-between;
 }
 .navForAdmin .menus{
-    width: 50%;
+    width: auto;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     text-align: left;
-    margin-left: auto;
 }
 .navForAdmin .menus a{
     text-decoration: none;
     color: white;
+    justify-content: space-between;
+    margin-right: 20px
 }
 .navForAdmin .logo{
 
