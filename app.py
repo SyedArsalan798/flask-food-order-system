@@ -317,6 +317,26 @@ def allCustomers():
         return render_template('userdetails.html', customers=customers)
     return redirect(url_for("adminLogin"))
 
+@app.route('/allRiders')
+def allRiders():
+    if "email" and "password" in session:
+        print("entered all riders")
+        riders = db.returnRider()
+        riders = riders.fetchall()
+        return render_template('riderdetails.html', riders= riders)
+    return redirect(url_for("adminLogin"))
+
+@app.route('/delRider/<int:id>')
+def delRider(id):
+    print("reached route del rider")
+    if "email" and "password" in session:
+        if db.riderIdExists(id):
+            print("rider id exists")
+            db.deleteRider(id)
+            return redirect(url_for('allRiders'))
+        else:
+            abort(404)
+    return redirect(url_for("adminLogin"))
 
 @app.route('/delCustomer/<int:id>')
 def delCustomer(id):

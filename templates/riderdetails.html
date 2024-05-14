@@ -1,0 +1,57 @@
+{% extends 'adminBase.html' %}
+{% block title %}Riders{% endblock title %}
+{% block body %}
+<div class="RidersContent">
+    {% for i in range(riders|length) %}
+    <div class="ridersCard">
+        <h3>ID#{{ riders[i][0] }}</h3>
+
+    <section class="ridersSec1">
+    <div class="RfirstLast">
+        <span class="riderslabel">
+            Full Name:
+        </span>
+        <p>{{ riders[i][3] }} {{ riders[i][4] }}</p>
+    </div>
+    <div class="Rridersname">
+        <span class="riderslabel">
+            ridersname:
+        </span>
+        <p>{{ riders[i][2] }}</p>
+    </div>
+    <div class="Rridersemail">
+        <span class="riderslabel">
+            Email:
+        </span>
+        <p>{{ riders[i][7] }}</p>
+    </div>
+</section>
+
+<section class="ridersSec2">
+    <div class="Rriderspassword">
+        <span class="riderslabel">
+            Password:
+        </span>
+        <p>{{ riders[i][5] }}</p>
+    </div>
+    <div class="Rridersphone">
+        <span class="riderslabel">
+            Phone No:
+        </span>
+        <p>{{ riders[i][1] }}</p>
+    </div>
+    <div class="Rridersaddress">
+        <span class="riderslabel">
+            Address:
+        </span>
+        <p>{{ riders[i][6] }}</p>
+    </div>
+</section>
+<div class="orderButton">
+    <a href="/delRider/{{ riders[i][0] }}"><button>REMOVE</button></a>
+</div>
+
+</div>
+{% endfor %}
+</div>
+{% endblock body %}

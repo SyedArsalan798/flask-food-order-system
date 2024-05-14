@@ -122,7 +122,7 @@ class Database:
         cursor = connection.cursor()
         Customers = cursor.execute("SELECT * from Customers")
         for customer in Customers:
-            if (Useremail and Userpassword) in customer:
+             if customer[7] == Useremail and customer[5] == Userpassword:
                 return True
         return False
     
@@ -515,7 +515,8 @@ class Database:
         ON ORDERED.pay_id = PAYMENT.pay_id
         INNER JOIN FOOD
         ON ORDERED.food_no = FOOD.food_no
-        where CUSTOMERS.customer_id = '{customerId}' AND ORDERED.order_status = 'Issued'
+        where CUSTOMERS.customer_id = '{customerId}' AND (ORDERED.order_status = 'Issued' OR ORDERED.order_status = 'Pending' 
+                                                                                         OR ORDERED.order_status = 'Delivered')
         order by ORDERED.Order_ID DESC
         ''')
         return orderDetails
