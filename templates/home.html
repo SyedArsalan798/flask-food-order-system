@@ -2,12 +2,31 @@
 {% block title %}Home{% endblock title %}
 {% block body %}
 
-<div class="sendToMenu">
+<!--<div class="sendToMenu">-->
+<!---<img src="{{ url_for('static', filename='images/menu.jpg') }}" alt="img" class="menu-image">-->
+<!--<span><a href="{{ url_for('menu') }}"> <button>MENU</button></a></span>-->
+<!--</div>-->
+<section class="parallax">
+    <h2 id="text_parallax">Hot & Spicy</h2>
+    <img src="static\images\Untitled design (1).png" id="burger">
+</section>
 
-<h1>Welcome to Hot n Spicy</h1>
-<p>Go checkout new products right in our store.</p>
-<img src="{{ url_for('static', filename='images/menu.jpg') }}" alt="img" class="menu-image">
-<span><a href="{{ url_for('menu') }}"> <button>MENU</button></a></span>
-</div>
+<section class="items">
+    <h2>Order Now!</h2>
+    <p>Serving only the best</p>
+    <div class = "container_burger">
+        <div class = "card_burger">
+            <div class = "imgBx_burger">
+                <img src = "static\images\burger-scroll.png" class="burger-image">
+            </div>
+                <div class = "contentBx">
+                    <h2>Burger</h2>
+                    <h3>Price:</h3>
+                    <span>500</span>
+                </div>
+                <a href="{{ url_for('menu') }}">Order Now</a>
+        </div>
+    </div>
+</section>
 
 {% endblock body %}
