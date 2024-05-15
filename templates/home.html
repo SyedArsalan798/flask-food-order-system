@@ -14,17 +14,29 @@
 <section class="items">
     <h2>Order Now!</h2>
     <p>Serving only the best</p>
-    <div class = "container_burger">
-        <div class = "card_burger">
-            <div class = "imgBx_burger">
-                <img src = "static\images\burger-scroll.png" class="burger-image">
+    <div class="container_cards">
+        <div class="card_burger">
+            <div class="imgBx_burger">
+                <img src="static\images\burger-scroll.png" class="burger-image">
             </div>
-                <div class = "contentBx">
-                    <h2>Burger</h2>
-                    <h3>Price:</h3>
-                    <span>500</span>
-                </div>
-                <a href="{{ url_for('menu') }}">Order Now</a>
+            <div class="contentBx">
+                <h2>Burger</h2>
+                <span>Rs 500 Only!</span>
+            </div>
+            <a href="{{ url_for('menu') }}">Order Now</a>
+        </div>
+    
+
+
+        <div class="card_pizza">
+            <div class="imgBx_pizza">
+                <img src="static\images\freepik-export-20240515144020YsYU.png" class="pizza-image">
+            </div>
+            <div class="contentBx">
+                <h2>Pizza</h2>
+                <span>Rs 2199 Only!</span>
+            </div>
+            <a href="{{ url_for('menu') }}">Order Now</a>
         </div>
     </div>
 </section>
