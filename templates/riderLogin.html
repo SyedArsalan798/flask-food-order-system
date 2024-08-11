@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/adminStyle.css') }}">
+    <title>Login as Rider</title>
+</head>
+<body>
+    <div class="FormContent">
+        {% if flag %}
+            <span style="color: white; background-color: rgb(253, 91, 91); padding: 5px; width:100% ;text-align: center;">Invalid credentials provided</span>
+        {% endif %}
+        <h1>Login as Rider.</h1>
+        <form action="#" method="post">
+            <input type="email" name="Rideremail" id="Rideremail" placeholder="Email" required><br><br>
+            <input type="password" name="Riderpassword" id="Riderpassword" placeholder="Password" required><br><br>
+            <input type="submit" value="LOGIN">
+        </form>
+        <p>or</p>
+        <a href="{{ url_for('riderSignup') }}"> <button>SIGN UP</button></a>
+    </div>
+</body>
+</html>
