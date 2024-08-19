@@ -1,49 +1,63 @@
-# HOT 'N SPICY 
-Created with Flask (Python micro framework for website development), SQlite3, HTML5, CSS3, JavaScript
+# HOT 'N SPICY  
+**A Modern Web Application for Restaurant Management and Food Delivery**  
 
-## Overview of the app itself
-This app is designed to streamline the interaction between restaurants, customers, and delivery personnel, providing a seamless integration of order processing and customer management. Its development reflects a commitment to leveraging modern web technologies to improve service quality and user experience in the food delivery industry.
+## Overview  
+**HOT 'N SPICY** is a web application designed to streamline interactions between restaurants, customers, and delivery personnel. By leveraging modern web technologies, this app provides a seamless integration of order processing and customer management, aimed at enhancing service quality and user experience in the food delivery industry.
 
-## Getting Started
- - Download/ Clone all necessary files from the repo
- - run app.py to get a link
- - press command and click the link to open the website
+## Technologies Used  
+- **Backend**: Flask (Python microframework)  
+- **Database**: SQLite3  
+- **Frontend**: HTML5, CSS3, JavaScript
 
-Note that, this project consist of `database.py` that contains all the code for the database management for the website.
+## Getting Started  
+Follow these steps to set up and run the application:
+
+1. **Download/Clone the Repository**:  
+   Clone the repository to your local machine or download all the necessary files.
+
+2. **Run the Application**:  
+   Navigate to the project directory and execute `app.py`.  
+   ```bash
+   python app.py
+
+## Access the Website:
+After running the application, a link will be generated. Press `Ctrl + Click` (or `Cmd + Click` on macOS) on the link to open the website in your browser.  
+**Note**: This project includes `database.py`, which contains all the code necessary for database management.
 
 ## Features
-There are many features including the features of customers and Admin. There is only one admin who is created while running the `app.py` code. 
-#### User Login
-Customers will be able to create an account on the website to log in and see the purchase history, buy items and interact with other informations.
 
-#### Product Purchase
-Users will be able to buy products from the online store with a user-friendly interface.
+### User Functionality
 
-#### Payment System (not real)
-The website will allows user to make payment right in our store without having to leave the website.
+- **User Authentication and Profile Management**:  
+  Customers can securely register, log in, and manage their profiles. They can also view their purchase history and interact with various features.
 
-#### Item Review and Ratings
-After receiving orders, customers will be able to review the delivery process and the item they received. Users will be able to rate the items they purchase based on their experience with the product.
+- **Product Purchase**:  
+  Users can browse and purchase products from the online store using a user-friendly interface.
 
-Admin can manage all the customer details on the website.
+- **Payment System (Demo)**:  
+  A simulated payment system is integrated, allowing users to make payments without leaving the website.
 
-#### User Authentication and Profile Management
-Secure login and registration processes for customers, delivery personnel, and administrators.
+- **Item Review and Ratings**:  
+  After receiving their orders, customers can review and rate the delivery process and the products received.
 
-#### Menu Management
-Allows restaurant administrators to add, update, and remove menu items.
+### Admin Functionality
 
-#### Order Management
- Customers can place orders, which are then processed and tracked through the system. Delivery personnel can view and manage these orders through their delivery status updates.
+- **Admin Dashboard**:  
+  There is a single admin account, automatically created when running `app.py`. The admin can manage all customer details and monitor system activity through a comprehensive dashboard.
 
-#### Real-Time Tracking
-Both customers and delivery personnel can track the status of deliveries in real-time, improving transparency and efficiency.
+- **Menu Management**:  
+  The admin can add, update, or remove menu items from the restaurant’s offerings.
 
-#### Review System
- Customers can rate and review food items and delivery services, which aids in maintaining service quality and customer satisfaction.
+- **Order Management**:  
+  The admin can oversee all orders, including processing and tracking customer orders through the system.
 
-#### Administrative Features
-Includes comprehensive dashboard functionalities for user management, order oversight, and real-time analytics.
+### Additional Features
 
+- **Real-Time Tracking**:  
+  Both customers and delivery personnel can track delivery statuses in real-time, improving transparency and efficiency.
 
+- **Review System**:  
+  A robust review system allows customers to rate and provide feedback on food items and delivery services, contributing to continuous service improvement.
 
+## Conclusion
+**HOT 'N SPICY** offers a comprehensive solution for managing restaurant orders and deliveries, with user-friendly interfaces and powerful administrative tools. Whether you’re a customer, delivery personnel, or administrator, this app is designed to enhance your experience in the food delivery ecosystem.
