@@ -4,22 +4,24 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <!--<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css">-->
+    <link rel="stylesheet" href="{{url_for('static', filename='css/style.css') }}">
     <title>{% block title %}{% endblock title %}</title>
 </head>
 <body>
-    <header>
-    <div class="navForhome">
-        <div class="logo">Foodie</div>
-        <div class="menus">
-        <a href="{{ url_for('home') }}">HOME</a>
-        <a href="{{ url_for('menu') }}">PRODUCTS</a>
-        <a href="{{ url_for('orderDetails') }}">MY ORDERS</a>
-        <a href="{{ url_for('account') }}">ACCOUNT</a>
-        <a href="{{ url_for('admin') }}">ADMIN</a>
-        <a href="{{ url_for('userLogout') }}">LOGOUT</a>
-        </div>
-    </div>
+    <header class="header_customer">
+        <a href="#" class="logo">
+            <img src="{{ url_for('static', filename='images/logo.png') }}" alt="" width="90" height="70">
+        </a>
+
+        <nav class="navbarHome">
+            <a href="{{ url_for('home') }}">HOME</a>
+            <a href="{{ url_for('menu') }}">PRODUCTS</a>
+            <a href="{{ url_for('orderDetails') }}">MY ORDERS</a>
+            <a href="{{ url_for('account') }}">ACCOUNT</a>
+            <a href="{{ url_for('admin') }}">ADMIN</a>
+            <a href="{{ url_for('userLogout') }}">LOGOUT</a>
+        </nav>
     </header>
     {% block body %}{% endblock body %}
     <script type="text/javascript" src="{{ url_for('static', filename='js/index.js') }}"></script>

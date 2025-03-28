@@ -40,7 +40,7 @@
                 </div>
 
             </div>
-            {% if orderDetails[i][8] != "Pending" %}
+            {% if orderDetails[i][8] != "Issued" %}
             <div class="reviewButton">
                 <a href="/review/{{ orderDetails[i][0] }}"><button id="revBtn" >REVIEW FOOD</button></a>
             </div>
@@ -49,7 +49,7 @@
         {% endfor %}
     </div>
     {% else %}
-    <p style="text-align: center;font-size: larger;">You haven't ordered any thing yet.</p>
+    <p style="text-align: center;font-size: larger;color: white; margin-top: 10%;">You haven't ordered any thing yet.</p>
     
 {% endif %}
     <!-- <script>

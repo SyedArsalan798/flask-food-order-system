@@ -1,28 +1,63 @@
-# flask-food-order-system
-Created with Flask (Python micro framework for website development), SQlite3, HTML5, CSS3, JavaScript
+# HOT 'N SPICY  
+**A Modern Web Application for Restaurant Management and Food Delivery**  
 
-# Getting Started
-First you will need to know that:
-- Create a virtual environment with `venv` in python.
-- Then install `flask` by `pip install flask`.
-- Then you have to run the `app.py` file.
-- It will generate a link to local server for browser, you have to click on that to make the site visible.
+## Overview  
+**HOT 'N SPICY** is a web application designed to streamline interactions between restaurants, customers, and delivery personnel. By leveraging modern web technologies, this app provides a seamless integration of order processing and customer management, aimed at enhancing service quality and user experience in the food delivery industry.
 
-Note that, this project consist of `database.py` that contains all the code for the database management for the website.
+## Technologies Used  
+- **Backend**: Flask (Python microframework)  
+- **Database**: SQLite3  
+- **Frontend**: HTML5, CSS3, JavaScript
 
-# Features
-There are many features including the features of customers and Admin. There is only one admin who is created while running the `app.py` code. 
-## User Login
-Customers will be able to create an account on the website to log in and see the purchase history, buy items and interact with other informations.
+## Getting Started  
+Follow these steps to set up and run the application:
 
-## Product Purchase
-Users will be able to buy products from the online store with a user-friendly interface.
+1. **Download/Clone the Repository**:  
+   Clone the repository to your local machine or download all the necessary files.
 
-## Payment System (not real)
-The website will allows user to make payment right in our store without having to leave the website.
+2. **Run the Application**:  
+   Navigate to the project directory and execute `app.py`.  
+   ```bash
+   python app.py
 
-## Item Review and Ratings
-After receiving orders, customers will be able to review the delivery process and the item they received. Users will be able to rate the items they purchase based on their experience with the product.
+## Access the Website:
+After running the application, a link will be generated. Press `Ctrl + Click` (or `Cmd + Click` on macOS) on the link to open the website in your browser.  
+**Note**: This project includes `database.py`, which contains all the code necessary for database management.
 
-Admin can manage all the customer details on the website.
+## Features
 
+### User Functionality
+
+- **User Authentication and Profile Management**:  
+  Customers can securely register, log in, and manage their profiles. They can also view their purchase history and interact with various features.
+
+- **Product Purchase**:  
+  Users can browse and purchase products from the online store using a user-friendly interface.
+
+- **Payment System (Demo)**:  
+  A simulated payment system is integrated, allowing users to make payments without leaving the website.
+
+- **Item Review and Ratings**:  
+  After receiving their orders, customers can review and rate the delivery process and the products received.
+
+### Admin Functionality
+
+- **Admin Dashboard**:  
+  There is a single admin account, automatically created when running `app.py`. The admin can manage all customer details and monitor system activity through a comprehensive dashboard.
+
+- **Menu Management**:  
+  The admin can add, update, or remove menu items from the restaurant’s offerings.
+
+- **Order Management**:  
+  The admin can oversee all orders, including processing and tracking customer orders through the system.
+
+### Additional Features
+
+- **Real-Time Tracking**:  
+  Both customers and delivery personnel can track delivery statuses in real-time, improving transparency and efficiency.
+
+- **Review System**:  
+  A robust review system allows customers to rate and provide feedback on food items and delivery services, contributing to continuous service improvement.
+
+## Conclusion
+**HOT 'N SPICY** offers a comprehensive solution for managing restaurant orders and deliveries, with user-friendly interfaces and powerful administrative tools. Whether you’re a customer, delivery personnel, or administrator, this app is designed to enhance your experience in the food delivery ecosystem.

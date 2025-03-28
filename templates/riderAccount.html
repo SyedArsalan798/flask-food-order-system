@@ -1,0 +1,46 @@
+{% extends 'riderHome.html' %}
+
+{% block title %}Account{% endblock title %}
+
+{% block body %}
+<div class="AccountContent">
+    <h2 class="accountHeading">ACCOUNT INFO</h2>
+    <div class="firstLastName">
+        <span class="accountLabel">
+            Full Name:
+        </span>
+        <p>{{ rider[3] }} {{ rider[4] }}</p>
+    </div>
+    <div class="username">
+        <span class="accountLabel">
+            Username:
+        </span>
+        <p>{{ rider[2] }}</p>
+    </div>
+    <div class="useremail">
+        <span class="accountLabel">
+            Email:
+        </span>
+        <p>{{ rider[7] }}</p>
+    </div>
+    <div class="userpassword">
+        <span class="accountLabel">
+            Password:
+        </span>
+        <p>{{ rider[5] }}</p>
+    </div>
+    <div class="userphone">
+        <span class="accountLabel">
+            Phone No:
+        </span>
+        <p>{{ rider[1] }}</p>
+    </div>
+    <div class="useraddress">
+        <span class="accountLabel">
+            Address:
+        </span>
+        <p>{{ rider[6] }}</p>
+    </div>
+</div>
+
+{% endblock body %}
